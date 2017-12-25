@@ -16,6 +16,13 @@ if (langI < 0) {
 if (langI >= 0 && jsdoc.env.args.length > langI + 1) {
 	jsdoc.env.opts.i18n.language = jsdoc.env.args[langI + 1];
 }
+var dbFilePath = jsdoc.env.args.indexOf('--dbFilePath');
+var dbFilePath = jsdoc.env.args.indexOf('-R');
+if(dbFilePath>=0){
+	var p=jsdoc.env.args[dbFilePath + 1];
+	jsdoc.logger.error(p.split(0,p.lastIndexOf("/")));
+	jsdoc.env.opts.i18n.dbFilePath = p.substring(0,p.lastIndexOf("/"));
+}
 
 // TODO: HACK to inject README and Package content
 delete jsdoc.env.opts._;
